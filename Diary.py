@@ -20,7 +20,7 @@ def ModifyDiary(index):
 def ReadDiary():
     logger.info("读取日记列表")
     while True:
-        print("\033[1;32;40m")
+        print("\033[1;32;40m")#调整输出颜色
         interface.ShowDiaryList()
         command = input("[q：返回，e：退出程序]")
         try:
@@ -28,27 +28,27 @@ def ReadDiary():
             interface.ShowDiary(temp)
             command = msvcrt.getch()
             while True:
-                if command == b'a':
+                if command == b'a':#向左翻页
                     interface.TurnPage(-1)
                     command = msvcrt.getch()
-                elif command == b'r':
+                elif command == b'd':#向右翻页
+                    interface.TurnPage(1)
+                    command = msvcrt.getch()
+                elif command == b'r':#修改当前日记
                     temp = interface.curIndex
                     ModifyDiary(temp)
                     interface.ShowDiary(temp)
                     command = msvcrt.getch()
-                elif command == b'd':
-                    interface.TurnPage(1)
-                    command = msvcrt.getch()
-                elif command ==b'e':
+                elif command ==b'e':#退出程序
                     os.system("cls")
                     os.sys.exit(0)
-                elif command == b'q':
+                elif command == b'q':#返回日记列表
                     break
                 
             continue
-        except SystemExit as e:raise e
-        except IndexError:pass
-        except ValueError:pass
+        except SystemExit as e:raise e#将退出异常上抛
+        except IndexError:pass#用户输入的数字非法，不做处理
+        except ValueError:pass#用户输入的指令非法，不做处理
         if command=="q":
             break
         elif command =='e':
