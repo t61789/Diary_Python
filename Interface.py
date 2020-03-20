@@ -25,9 +25,10 @@ class Interface(object):
         print("*  Diary--v1.0  *")
         print("*               *")
         print("*****************")
-        print("[1] 写日记    ")
-        print("[2] 读日记    ")
-        print("[3] 退出      ")
+        print("[1] 写日记      ")
+        print("[2] 读日记      ")
+        print("[3] 查看log文件 ")
+        print("[4] 退出        ")
 
     def ShowDiaryList(self):#给日期加上下标并显示
         os.system("cls")

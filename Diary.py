@@ -8,11 +8,12 @@ import logging
 import Log
 import traceback
 
-dataManager = DataManager()
-interface = Interface(dataManager)
 
 logger = Log.getLogger()
 logger.info("程序启动")
+
+dataManager = DataManager()
+interface = Interface(dataManager)
 
 def ModifyDiary(index):
     dataManager.ModifyDiary(index)
@@ -62,6 +63,11 @@ def WriteDiary():
     dataManager.AddNewDiaryFromFile(newFilePath,newFileId)
     logger.info("日记 %s 创建完成"%newFileId)
 
+def OpenLogFile():
+    try:
+        os.system("explorer.exe log.log")
+    except:pass
+
 #start here ----------------------------------
 
 dataManager.CleanUnsavedDiary()
@@ -76,6 +82,8 @@ try:
         elif command == b'2':
             ReadDiary()
         elif command == b'3':
+            OpenLogFile()
+        elif command == b'4':
             os.sys.exit(0)
 except SystemExit as e:
     logger.info("程序关闭")

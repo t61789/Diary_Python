@@ -6,13 +6,21 @@ import Log
 
 logger = logging.getLogger()
 
-
 class DataManager():
     def __init__(self):
         self.__configPath = "data.xml"
         self.__xmlTree = ET.parse(self.__configPath)
         self.__xmlRoot = self.__xmlTree.getroot()
         self.vimPath = self.__xmlRoot.find("config").find("vim-path").text
+        self.__CheckConfig()
+
+    def __CheckConfig(self):
+        try:
+            if not os.path.exists(self.vimPath): 
+                raise FileNotFoundError("未找到vim的安装路径")
+        except:
+            logger.error("未找到vim的安装路径")
+            raise FileNotFoundError("未找到vim的安装路径")
 
     def __RecordUnsavedDiaryPath(self, path):#记录未保存的文件路径
         tempEle = ET.Element("path")
