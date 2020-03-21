@@ -59,9 +59,7 @@ def WriteDiary():
     logger.info("开始写日记")
     newFileId = "D"+str(uuid.uuid4()).replace("-","")
     newFilePath = newFileId+".txt"
-    os.system(dataManager.vimPath+" "+newFilePath)
     dataManager.AddNewDiaryFromFile(newFilePath,newFileId)
-    logger.info("日记 %s 创建完成"%newFileId)
 
 def OpenLogFile():
     try:
@@ -86,6 +84,7 @@ try:
         elif command == b'4':
             os.sys.exit(0)
 except SystemExit as e:
+    dataManager.NormalExit()
     logger.info("程序关闭")
 except BaseException as e:
     logger.error("特殊异常：\n\n%s"%traceback.format_exc())
